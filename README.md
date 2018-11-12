@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+vue init webpack-simple project-name
+
 ## Build Setup
 
 ``` bash
