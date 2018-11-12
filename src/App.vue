@@ -130,16 +130,8 @@ export default {
   margin: 10px 0;
 }
 
-.flip-enter {
-
-}
-
 .flip-enter-active {
   animation: flipInX 0.3s linear;
-}
-
-.flip-leave {
-
 }
 
 .flip-leave-active {

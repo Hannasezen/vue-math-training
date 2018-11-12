@@ -31,12 +31,15 @@
             answers() {
                 let good = this.good;
                 let res = [good];
+
                 while(res.length < this.settings.variants) {
                     let num = mtRand(good - this.settings.range, good + this.settings.range);
-                    if(res.indexOf(num) === -1) {
+                   
+                   if(res.indexOf(num) === -1) {
                         res.push(num);
                     }                    
                 }
+                
                 return res.sort(function() {
                     return Math.random() > 0.5;
                 });
