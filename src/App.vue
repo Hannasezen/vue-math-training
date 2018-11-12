@@ -12,8 +12,9 @@
         ></AppStartScreen>
         <AppQuestion
             v-else-if="state === 'question'"
-          @success="onSuccess"
+            @success="onSuccess"
             @error="onError"
+            :settings="levels[level]"
         ></AppQuestion>
         <AppMessage
           v-else-if="state === 'message'"
@@ -25,6 +26,7 @@
             v-else-if="state === 'result'"
             :stats="stats"
             @repeat="onStart"
+            @nextLevel="onNextLevel"
             ></AppResultScreen>
         <div v-else>Unknown state</div>
       </transition>
@@ -46,7 +48,28 @@ export default {
         success: 0,
         error: 0
       },
-      questMax: 3
+      questMax: 3,
+      level: 0,
+      levels: [
+        {
+          from: 10,
+          to: 40,
+          range: 5,
+          variants: 2
+        },
+        {
+          from: 100,
+          to: 200,
+          range: 20,
+          variants: 4
+        },
+        {
+          from: 500,
+          to: 900,
+          range: 40,
+          variants: 6
+        }
+      ]
     }
   },
   computed: {
@@ -84,6 +107,10 @@ export default {
       else {
         this.state = 'result';
       }
+    },
+    onNextLevel() {
+      this.level++;
+      this.onStart();
     }
   }
 }
