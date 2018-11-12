@@ -2,7 +2,7 @@
   <div class="training">
     <h1>Math training</h1>
     <div class="progress">
-      <div class="progress-bar"></div>
+      <div class="progress-bar" :style="progressStyles"></div>
     </div>
     <div class="box">
       <transition name="flip" mode="out-in">
@@ -48,6 +48,11 @@ export default {
   computed: {
     questDone() {
       return this.stats.success + this.stats.error;
+    },
+    progressStyles() {
+      return {
+        width: (this.questDone / this.questMax * 100) + '%'
+      }
     }
   },
   methods: {
@@ -58,11 +63,13 @@ export default {
       this.state = 'message';
       this.message.text = 'Good Job!';
       this.message.type = 'success';
+      this.stats.success++;
     },
     onError(msg) {
       this.state = 'message';
       this.message.text = msg;
       this.message.type = 'warning';
+      this.stats.error++;
     },
     onNext() {
       this.state = 'question';
@@ -75,6 +82,10 @@ export default {
 .training {
   max-width: 700px;
   margin: 20px auto;
+}
+
+.progress-bar {
+  transition: width 0.5s;
 }
 
 .box {
